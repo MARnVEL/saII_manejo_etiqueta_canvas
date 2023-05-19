@@ -1,4 +1,4 @@
-# Utilización librería TFJS-VIS - *TensorFlow.js*
+# Utilización etiqueta canvas e introducción a imágenes con - *TensorFlow.js*
 
 Este repositorio tiene como ojetivo dar respuesta a las consignas planteadas en la asignatura *Seminario de Actualización 2* de la **Tecnicatura Superior en Desarrollo de Software** dictada en el **Instituto Politécnico de Formosa (IPF)**.
 
