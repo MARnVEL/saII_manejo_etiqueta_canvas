@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+	<title>Ejemplo de Canvas</title>
+</head>
+<body>
+	<!-- Creamos un canvas con un id "miCanvas" y las dimensiones que queramos -->
+	<div id="divCanvas">
+		<canvas id="miCanvas" width="400" height="400">
+		</canvas>
+	</div>
+
+	<div id="divCanvas2">
+		<canvas id="miCanvas2" width="100" height="100">
+		</canvas>
+	</div>
+
+	<script>
+		// Obtenemos las etiquetas canvas y su contexto de dibujo
+		const miCanvas = document.getElementById("miCanvas");
+		const miCanvas2 = document.getElementById("miCanvas2");
+		
+		
+		const bigMess = tf.randomUniform([100, 100, 3]);
+
+		const contexto = miCanvas.getContext("2d");
+
+		// Dibujamos un cuadrado relleno de color rojo en la posición x=50, y=50, con ancho 100px y alto 100px
+		contexto.fillStyle = "red";
+		contexto.fillRect(5, 5, 100, 100);
+		
+		contexto.fillStyle = "gray";
+		contexto.fillRect(5, 5, 10, 10);
+
+		contexto.fillStyle = "green";
+		contexto.fillRect(300, 300, 100, 100);
+
+		// Obtenemos la posición y dimensiones del rectángulo rojo
+		const xRectanguloRojo = 5;
+		const yRectanguloRojo = 5;
+		const redRectWidth = 100;
+		const redRectHeight = 100;
+
+		// Dibujamos un círculo relleno de color azul con centro en x=250, y=150 y radio de 50px
+		contexto.beginPath();
+		contexto.arc(55, 345, 50, 0, 2 * Math.PI);
+		contexto.fillStyle = "blue";
+		contexto.fill();
+		
+		contexto.beginPath();
+		contexto.arc(345, 55, 50, 0, 2 * Math.PI);
+		contexto.fillStyle = "blue";
+		contexto.fill();
+
+
+		// Dibujamos una línea horizontal de color verde desde x=50, y=200 hasta x=350, y=200
+		contexto.beginPath();
+		contexto.moveTo(0, 0);
+		contexto.lineTo(400, 0);
+		contexto.strokeStyle = "pink";
+		contexto.lineWidth = 10;
+		contexto.stroke();
+
+		contexto.beginPath();
+		contexto.moveTo(0, 400);
+		contexto.lineTo(400, 400);
+		contexto.strokeStyle = "brown";
+		contexto.lineWidth = 10;
+		contexto.stroke();
+
+		
+
+		// Dibujamos una línea vertical de color púrpura desde x=200, y=50 hasta x=200, y=350
+		contexto.beginPath();
+		contexto.moveTo(0, 0);
+		contexto.lineTo(0, 400);
+		contexto.strokeStyle = "orange";
+		contexto.lineWidth = 10;
+		contexto.stroke();
+
+		contexto.beginPath();
+		contexto.moveTo(400, 0);
+		contexto.lineTo(400, 400);
+		contexto.strokeStyle = "purple";
+		contexto.lineWidth = 10;
+		contexto.stroke();
+
+		/*
+		const newCanvas = document.createElement('canvas');
+		newCanvas.width = '200'; // Establece el ancho del lienzo a 500 píxeles
+		newCanvas.height = '200';
+		newCanvas.id = 'MyNewCanvas'
+		newCanvas.appendChild(divNuevoCanvas);
+		*/
+		
+
+		// Establecemos la posición y dimensiones  del canvas con id="miCanvas2" basado en el rectángulo rojo
+		miCanvas2.style.position = "absolute";
+		miCanvas2.style.left = `${xRectanguloRojo+7.5}px` ;
+		miCanvas2.style.top = `${yRectanguloRojo+7.5}px`;
+		miCanvas2.style.width = redRectWidth + "px";
+		miCanvas2.style.height = redRectHeight + "px";
+
+		tf.browser.toPixels(bigMess, miCanvas2).then(() => {
+			// It's not bad practice to clean up and make sure we got everything
+			bigMess.dispose();
+			console.log("Make sure we cleaned up", tf.memory().numTensors);
+		});
+
+	</script>
+</body>
+</html>
